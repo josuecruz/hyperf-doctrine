@@ -63,16 +63,31 @@ final class Connection implements DoctrineConnection
 
     public function beginTransaction(): bool
     {
-        return $this->connection->beginTransaction();
+        try {
+            $this->connection->beginTransaction();
+            return true;
+        } catch (\Throwable $e) {
+            return false;
+        }
     }
 
     public function commit(): bool
     {
-        return $this->connection->commit();
+        try {
+            $this->connection->commit();
+            return true;
+        } catch (\Throwable $e) {
+            return false;
+        }
     }
 
     public function rollBack(): bool
     {
-        return $this->connection->rollback();
+        try {
+            $this->connection->rollback();
+            return true;
+        } catch (\Throwable $e) {
+            return false;
+        }
     }
 }
